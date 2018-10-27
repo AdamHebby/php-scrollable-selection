@@ -1,0 +1,13 @@
+{
+    "name": "adamhebby/php-scrollable-selection",
+    "description": "PHP Scrollable user selection list",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "AdamHebby",
+            "email": "adamhebden56@gmail.com"
+        }
+    ],
+    "require": {}
+}
