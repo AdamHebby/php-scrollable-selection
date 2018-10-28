@@ -3,7 +3,7 @@ require_once __DIR__ . '/src/ScrollableSelection.php';
 
 $list = array();
 
-for ($i=1; $i < 50; $i++) {
+for ($i=1; $i < 15; $i++) {
     $list[] = "$i " . str_repeat('-', 20);
 }
 
@@ -11,7 +11,7 @@ $ScrollableSelection = new ScrollableSelection(
     [
         'list'     => $list,
         'maxItems' => 10,
-        'loops'    => false,
+        'loops'    => true,
         'startKey' => 0,
         'cursor'   => '>',
         'colors' => [
