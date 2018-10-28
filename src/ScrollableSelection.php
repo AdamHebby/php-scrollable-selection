@@ -10,6 +10,7 @@ class ScrollableSelection
     private $list;
     private $listCount;
     private $longestString;
+    private $longestKey;
     private $loops;
     private $maxItems;
     private $visibleKeys;
@@ -51,20 +52,31 @@ class ScrollableSelection
 
         $this->listCount = count($this->list);
 
+        $listItemKey = 0;
         foreach ($this->list as $key => $value) {
-            $this->list[$key] = [$key, $value];
+            $this->list[$key] = [
+                'originalKey' => $key,
+                'value'       => $value,
+                'newListKey'  => $listItemKey
+            ];
+            $listItemKey++;
         }
+
+        $this->list = array_values($this->list);
 
         if ($this->maxItems > $this->listCount) {
             $this->maxItems = $this->listCount;
         }
 
         $this->longestString = max(array_map(function ($arr) {
-            return strlen($arr[1]);
+            return strlen($arr['value']);
+        }, $this->list));
+
+        $this->longestKey = max(array_map(function ($arr) {
+            return strlen($arr['newListKey']);
         }, $this->list));
 
         $this->updateTerminalDimensions();
-
     }
     public function displayList()
     {
@@ -80,7 +92,7 @@ class ScrollableSelection
 
             if ($inputKey === 'return') {
                 pclose($proc);
-                return $this->currentKey;
+                return $this->list[$this->currentKey]['originalKey'];
             } else if ($inputKey === 'down') {
                 if ($this->increaseKey()) {
                     $this->removePreviousLines();
@@ -107,11 +119,11 @@ class ScrollableSelection
         $this->setVisibleList();
 
         foreach ($this->listToDisplay as $item) {
-            $itemKey           = $item[0];
-            $itemVal           = $item[1];
+            $itemKey           = $item['newListKey'];
+            $itemVal           = $item['value'];
             $active            = ($itemKey == $this->currentKey);
             $displayKey        = ($itemKey + 1) . ")";
-            $keyPadding        = str_repeat(' ', (strlen($this->listCount) + 1) - strlen($displayKey));
+            $keyPadding        = str_repeat(' ', $this->longestKey + 1 - strlen($displayKey));
             $cursor            = ($active) ? $this->cursor : str_repeat(' ', strlen($this->cursor));
             $displayString     = " $cursor {$keyPadding}$displayKey $itemVal \n";
             $this->extraLength = strlen($displayString) - strlen($itemVal);
@@ -132,7 +144,6 @@ class ScrollableSelection
             $this->listToDisplay = array_slice($this->list, $this->currentKey, $this->maxItems, false);
         }
 
-
         if (
             count($this->listToDisplay) < $this->maxItems && 
             $this->maxItems <= $this->listCount &&
@@ -145,14 +156,14 @@ class ScrollableSelection
 
         $lineCount = 0;
         foreach ($this->visibleKeys as $value) {
-            $lineCount += count(str_split($this->list[$value][1], $this->termWidth));
+            $lineCount += count(str_split($this->list[$value]['value'], $this->termWidth));
         }
         $this->lastLines = $lineCount;
     }
     private function setVisibleKeys()
     {
         $this->visibleKeys = array_map(function($arr) {
-            return $arr[0];
+            return $arr['newListKey'];
         }, $this->listToDisplay);
     }
     private function increaseKey()
