@@ -1,0 +1,11 @@
+{
+    "list": [],
+    "maxItems": 5,
+    "loops": true,
+    "startKey": 0,
+    "cursor": ">",
+    "colors": {
+        "active": "white",
+        "inactive": "dark_gray"
+    }
+}

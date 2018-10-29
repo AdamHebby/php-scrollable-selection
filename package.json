@@ -1,0 +1,7 @@
+{
+    "repository": "https://github.com/AdamHebby/php-scrollable-selection",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "readline": "^1.3.0"
+    }
+}
