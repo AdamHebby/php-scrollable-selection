@@ -23,13 +23,16 @@ Allows a user to select an option from a scrollable list, returns key selected f
 
 ### Example
 ```PHP
+require __DIR__ . '/vendor/autoload.php';
+use AdamHebby\ScrollableSelection;
+
 $list = array();
 
 for ($i=1; $i < 50; $i++) {
     $list[] = "$i " . str_repeat('-', 20);
 }
 
-$ScrollableSelection = new \ScrollableSelection(
+$ScrollableSelection = new ScrollableSelection(
     [
         'list'     => $list,
         'maxItems' => 10,
@@ -45,7 +48,7 @@ $ScrollableSelection = new \ScrollableSelection(
 
 $key = $ScrollableSelection->displayList();
 
-if (!is_numeric($key)) {
+if (!isset($list[$key])) {
     echo "User quit selection \n\n";
 } else {
     echo "\nUser selected {$list[$key]} \n\n";
