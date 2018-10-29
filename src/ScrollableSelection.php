@@ -1,5 +1,7 @@
 <?php
 
+namespace AdamHebby;
+
 /**
  * Displays a scrollable list to the user in the command line. Allows the user to
  * select an option from a specified list and scroll using arrow keys.
@@ -71,7 +73,7 @@ class ScrollableSelection
     {
         // Load default config JSON file
         $defaultConf = json_decode(
-            file_get_contents('config.json'),
+            file_get_contents(__DIR__.'/../config.json'),
             true
         );
 
@@ -137,7 +139,7 @@ class ScrollableSelection
         }
 
         // Get input from user, JS returns key names
-        $proc = popen("node getInput.js", 'r');
+        $proc = popen("cd " . __DIR__ . " && node ../getInput.js", 'r');
         while (!feof($proc)) {
             $inputKey = trim(fread($proc, 4096));
             @flush();
