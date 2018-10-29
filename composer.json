@@ -1,5 +1,6 @@
 {
     "name": "adamhebby/php-scrollable-selection",
+    "version": "v1.0.0",
     "description": "PHP Scrollable user selection list",
     "type": "library",
     "license": "Apache-2.0",
