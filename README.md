@@ -1,5 +1,7 @@
 # PHP Scrollable Selection
 
+[![Latest Stable Version](https://poser.pugx.org/adamhebby/php-scrollable-selection/v/stable)](https://packagist.org/packages/adamhebby/php-scrollable-selection) [![Total Downloads](https://poser.pugx.org/adamhebby/php-scrollable-selection/downloads)](https://packagist.org/packages/adamhebby/php-scrollable-selection) [![Latest Unstable Version](https://poser.pugx.org/adamhebby/php-scrollable-selection/v/unstable)](https://packagist.org/packages/adamhebby/php-scrollable-selection) [![License](https://poser.pugx.org/adamhebby/php-scrollable-selection/license)](https://packagist.org/packages/adamhebby/php-scrollable-selection)
+
 Allows a user to select an option from a scrollable list, returns key selected from original array input
 
 
@@ -15,6 +17,9 @@ Allows a user to select an option from a scrollable list, returns key selected f
 #### Available Colors
 
 ![](https://image.ibb.co/mAaUfq/php-scrollable-selection-available-colors.png)
+
+### Installation
+`composer require adamhebby/php-scrollable-selection`
 
 ### Example
 ```PHP
