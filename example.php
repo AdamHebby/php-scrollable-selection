@@ -1,13 +1,14 @@
 <?php
-require_once __DIR__ . '/src/ScrollableSelection.php';
+require __DIR__ . '/vendor/autoload.php';
+use AdamHebby\ScrollableSelection;
 
 $list = array();
 
-for ($i=1; $i < 15; $i++) {
+for ($i=1; $i < 50; $i++) {
     $list[] = "$i " . str_repeat('-', 20);
 }
 
-$ScrollableSelection = new \ScrollableSelection(
+$ScrollableSelection = new ScrollableSelection(
     [
         'list'     => $list,
         'maxItems' => 10,
